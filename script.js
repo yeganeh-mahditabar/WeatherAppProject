@@ -30,7 +30,7 @@ const createWeatherCard = (cityName, weatherItem, index) => {
     }
 }
 const getWeatherDetails = (cityName, lat, lon) => {
-    const WEATHER_API_URL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    const WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
     fetch(WEATHER_API_URL).then(res => res.json()).then(data => {
         const uniqueForecastDays = [];
@@ -61,7 +61,7 @@ const getWeatherDetails = (cityName, lat, lon) => {
 const getCityDetails = () => {
     let cityName = cityInput.value.trim();
     if(!cityName) return;
-    const GEOCODING_API_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
+    const GEOCODING_API_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
 
     fetch(GEOCODING_API_URL).then(res => res.json()).then(data => {
         if(!data.length) return alert(`No coordinates found for ${cityName}`);
