@@ -4,7 +4,14 @@ const searchButton = document.querySelector(".search-btn");
 const getCityDetails = () => {
     let cityName = cityInput.value.trim();
     if(!cityName) return;
-    
-    console.log(cityName);
+    const GEOCODING_API_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
+
+    fetch(GEOCODING_API_URL).then(res => res.json()).then(data => {
+        if(!data.length) return alert(`No coordinates found for ${cityName}`);
+        const { name, lat, lon} = data[0];
+        getWeatherDetails(name, lat, lon);
+    }).catch(() => {
+        alert("An error occurred while fetching the coordinates!");
+    });
 }    
 searchButton.addEventListener("click", getCityDetails);
